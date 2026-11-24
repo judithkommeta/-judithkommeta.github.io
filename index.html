@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Judith Kom Meta</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Judith Kom Meta, Data Analyst certifiée Power BI (PL-300). Tableaux de bord, études de cas et parcours.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout : colonne éditoriale de 72rem, alignée à gauche ; chaque projet = texte à gauche, preuve (graphique + DAX) à droite. */
+:root{
+  --bg:#F2F5F6; --surface:#FFFFFF; --ink:#14212A; --muted:#566570; --line:#D6DEE2;
+  --accent:#0D6C74; --accent-soft:#DDEEEF; --signal:#B86A12; --bar:#B3C1C8; --code-bg:#EAF0F2;
+  --display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E1519; --surface:#152027; --ink:#E4EBEE; --muted:#93A4AE; --line:#24323A;
+  --accent:#55B8C0; --accent-soft:#173539; --signal:#E9A24C; --bar:#3F5059; --code-bg:#1A272E; color-scheme:dark } }
+:root[data-theme="dark"]{
+  --bg:#0E1519; --surface:#152027; --ink:#E4EBEE; --muted:#93A4AE; --line:#24323A;
+  --accent:#55B8C0; --accent-soft:#173539; --signal:#E9A24C; --bar:#3F5059; --code-bg:#1A272E; color-scheme:dark }
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{background:var(--bg);color:var(--ink);font:400 1rem/1.6 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:72rem;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.1;text-wrap:balance;margin:0}
+p{margin:0}
+.eyebrow{font:500 .75rem/1.2 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+/* barre de navigation */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:10;background:var(--bg)}
+.nav{position:sticky;top:env(safe-area-inset-top, 0px);z-index:5;background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:.75rem}
+.brand{font:700 1rem/1 var(--display);color:var(--ink);text-decoration:none;white-space:nowrap}
+.nav ul{display:flex;gap:1.25rem;list-style:none;margin:0;padding:0;overflow-x:auto;scrollbar-width:none}
+.nav ul a{font-size:.875rem;color:var(--muted);text-decoration:none;white-space:nowrap}
+.nav ul a:hover{color:var(--ink)}
+@media (max-width:560px){.nav ul li:not(:last-child){display:none}}
+
+/* hero */
+.hero{padding-block:4.5rem 3.5rem;border-bottom:1px solid var(--line)}
+.hero .wrap{display:grid;gap:2.5rem}
+.hero h1{font-size:clamp(2.6rem, 7vw, 5rem);font-weight:700;letter-spacing:-.02em}
+.hero .role{font:500 clamp(1.1rem,2.2vw,1.35rem)/1.4 var(--body);color:var(--accent);margin-top:.75rem}
+.hero .pitch{max-width:40rem;font-size:1.125rem;color:var(--ink);margin-top:1.25rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.chip{font:500 .8rem/1 var(--mono);padding:.45rem .65rem;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink)}
+.chip.cert{border-color:var(--accent);color:var(--accent)}
+.ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
+.ledger div{padding:1rem 1rem 0 0;display:flex;flex-direction:column;gap:.35rem}
+.ledger div + div{padding-left:1rem;border-left:1px solid var(--line)}
+.ledger strong{font:700 clamp(1.9rem,4vw,2.6rem)/1 var(--display);letter-spacing:-.02em}
+.ledger span{font-size:.875rem;color:var(--muted);line-height:1.4}
+@media (max-width:760px){.ledger{grid-template-columns:repeat(2,minmax(0,1fr))}.ledger div:nth-child(3){padding-left:0;border-left:0}.ledger div:nth-child(n+3){padding-top:1.25rem}}
+
+section{padding-block:4.5rem}
+section + section{border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:.75rem;margin-bottom:2.5rem;max-width:44rem}
+.sec-head h2{font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.015em}
+.sec-head p{color:var(--muted)}
+
+/* projets */
+.project{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:2.5rem;padding-block:2.5rem;border-top:1px solid var(--line)}
+.project:first-of-type{border-top:0;padding-top:0}
+@media (max-width:900px){.project{grid-template-columns:minmax(0,1fr)}}
+.project h3{font-size:clamp(1.5rem,3vw,2rem);letter-spacing:-.01em}
+.meta{display:flex;flex-wrap:wrap;gap:.4rem 1rem;margin-top:.6rem;font:400 .8rem/1.4 var(--mono);color:var(--muted)}
+.question{margin-top:1.25rem;font-size:1.0625rem;max-width:36rem}
+.question b{font-weight:600}
+dl.facts{display:grid;grid-template-columns:auto minmax(0,1fr);gap:.5rem 1.25rem;margin:1.5rem 0 0;font-size:.925rem}
+dl.facts dt{font:500 .72rem/1.9 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+dl.facts dd{margin:0}
+.insights{list-style:none;margin:1.5rem 0 0;padding:0;display:grid;gap:.75rem}
+.insights li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:1rem;align-items:baseline;padding-top:.75rem;border-top:1px dashed var(--line)}
+.insights .fig{font:700 1.35rem/1 var(--display);color:var(--accent);font-variant-numeric:tabular-nums}
+.proof{display:flex;flex-direction:column;gap:1rem;min-width:0}
+figure{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:1.25rem 1.25rem 1rem}
+figcaption{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.75rem}
+figcaption b{font:600 .95rem/1.3 var(--body)}
+figcaption span{font:400 .75rem/1.3 var(--mono);color:var(--muted)}
+figure svg{display:block;width:100%;height:auto;max-width:100%}
+.legend{display:flex;gap:1rem;margin-top:.5rem;font-size:.8rem;color:var(--muted)}
+.legend i{display:inline-block;width:.7rem;height:.7rem;border-radius:2px;margin-right:.35rem;vertical-align:-1px}
+svg .grid{stroke:var(--line);stroke-width:1}
+svg .tick{fill:var(--muted);font:400 11px var(--mono)}
+svg .lab{fill:var(--ink);font:500 12px var(--body)}
+svg .val{fill:var(--ink);font:600 11px var(--mono)}
+svg .pos{fill:var(--accent);font:600 11px var(--mono)}
+svg .neg{fill:var(--signal);font:600 11px var(--mono)}
+svg .bar{fill:var(--bar)}
+svg .bar-hi{fill:var(--signal)}
+svg .bar-acc{fill:var(--accent)}
+details.dax{background:var(--code-bg);border-radius:6px;border:1px solid var(--line)}
+details.dax summary{cursor:pointer;padding:.7rem 1rem;font:500 .8rem/1.3 var(--mono);color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:1rem}
+details.dax summary::-webkit-details-marker{display:none}
+details.dax summary::after{content:"+";color:var(--accent);font-weight:600}
+details.dax[open] summary::after{content:"−"}
+details.dax pre{margin:0;padding:0 1rem 1rem;overflow-x:auto;font:400 .78rem/1.6 var(--mono);color:var(--ink)}
+.pages{display:flex;flex-wrap:wrap;gap:.4rem}
+.pages span{font:400 .75rem/1 var(--mono);padding:.4rem .55rem;border-radius:3px;background:var(--accent-soft);color:var(--ink)}
+.note{font-size:.8rem;color:var(--muted)}
+
+/* missions */
+.missions{display:grid;gap:0}
+.mission{display:grid;grid-template-columns:14rem minmax(0,1fr) 13rem;gap:2rem;padding-block:2rem;border-top:1px solid var(--line)}
+.mission:first-child{border-top:2px solid var(--ink)}
+@media (max-width:900px){.mission{grid-template-columns:minmax(0,1fr);gap:1rem}}
+.mission .when{font:400 .8rem/1.5 var(--mono);color:var(--muted)}
+.mission .when b{display:block;font:700 1.15rem/1.2 var(--display);color:var(--ink);margin-bottom:.25rem}
+.mission h3{font-size:1.3rem;margin-bottom:.6rem}
+.mission ul{margin:.75rem 0 0;padding-left:1.1rem;display:grid;gap:.35rem;font-size:.95rem}
+.mission .res{display:grid;gap:1rem;align-content:start}
+.mission .res div strong{display:block;font:700 1.9rem/1 var(--display);color:var(--accent)}
+.mission .res div span{font-size:.85rem;color:var(--muted)}
+.stack{margin-top:.9rem;font:400 .78rem/1.4 var(--mono);color:var(--muted)}
+
+/* compétences */
+.skills{width:100%;border-collapse:collapse;font-size:.95rem}
+.table-scroll{overflow-x:auto}
+.skills th,.skills td{text-align:left;padding:.85rem 1rem .85rem 0;border-top:1px solid var(--line);vertical-align:top}
+.skills thead th{font:500 .72rem/1.2 var(--mono);text-transform:uppercase;letter-spacing:.07em;color:var(--muted);border-top:2px solid var(--ink)}
+.skills td:first-child{font-weight:600;white-space:nowrap}
+.skills td:last-child{color:var(--muted);font-size:.875rem}
+
+/* parcours */
+.cols{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:3rem}
+@media (max-width:820px){.cols{grid-template-columns:minmax(0,1fr)}}
+.timeline{list-style:none;margin:0;padding:0}
+.timeline li{display:grid;grid-template-columns:8.5rem minmax(0,1fr);gap:1rem;padding-block:.85rem;border-top:1px solid var(--line)}
+.timeline .d{font:400 .8rem/1.6 var(--mono);color:var(--muted)}
+.timeline b{font-weight:600}
+.timeline small{display:block;color:var(--muted);font-size:.875rem}
+h3.sub{font-size:1.1rem;margin-bottom:1rem}
+.side{display:grid;gap:2rem;align-content:start}
+
+/* contact */
+.contact{background:var(--ink);color:var(--bg)}
+.contact .wrap{padding-block:4rem;display:grid;gap:1.5rem}
+.contact h2{font-size:clamp(1.8rem,4vw,2.6rem);color:var(--bg)}
+.contact p{max-width:38rem;color:color-mix(in srgb, var(--bg) 78%, var(--ink))}
+.links{display:flex;flex-wrap:wrap;gap:.75rem}
+.links a,.links button{font:500 .9rem/1 var(--body);padding:.8rem 1.1rem;border-radius:4px;border:1px solid color-mix(in srgb, var(--bg) 40%, var(--ink));color:var(--bg);background:transparent;text-decoration:none;cursor:pointer}
+.links a.primary{background:var(--bg);color:var(--ink);border-color:var(--bg)}
+.links a:hover,.links button:hover{border-color:var(--bg)}
+.mail{font:400 .9rem/1.4 var(--mono);color:var(--bg);user-select:all}
+footer{padding-block:1.5rem;font-size:.8rem;color:var(--muted)}
+</style>
+</head>
+<body>
+
+
+<nav class="nav" aria-label="Sections">
+  <div class="wrap">
+    <a class="brand" href="#top">Judith Kom Meta</a>
+    <ul>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#missions">Missions</a></li>
+      <li><a href="#competences">Compétences</a></li>
+      <li><a href="#parcours">Parcours</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Data Analyst · 3 ans d'expérience</p>
+      <h1>Judith Kom Meta</h1>
+      <p class="role">Je transforme des données opérationnelles et commerciales en décisions.</p>
+      <p class="pitch">Du recueil du besoin métier jusqu'au tableau de bord utilisé par la direction : préparation des données, modélisation, mesures DAX, restitution et accompagnement des utilisateurs. Expérience en transport automobile, en conseil data et dans l'énergie.</p>
+      <div class="chips">
+        <span class="chip cert">Microsoft PL-300 · Power BI Data Analyst</span>
+        <span class="chip cert">Microsoft AZ-900 · Azure Fundamentals</span>
+        <span class="chip">Power BI · DAX · Power Query</span>
+        <span class="chip">SQL</span>
+        <span class="chip">Python</span>
+        <span class="chip">Excel · VBA</span>
+      </div>
+    </div>
+    <div class="ledger num" aria-label="Résultats obtenus en mission">
+      <div><strong>+15 %</strong><span>de disponibilité de la flotte de véhicules · CAT France</span></div>
+      <div><strong>−10 pts</strong><span>de taux d'attrition client · VENOM (énergie)</span></div>
+      <div><strong>−30 %</strong><span>de temps de traitement manuel grâce aux macros VBA</span></div>
+      <div><strong>~10</strong><span>tableaux de bord Power BI livrés à des clients · DATA ON</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section id="projets">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Projets Power BI</p>
+      <h2>Trois tableaux de bord, trois questions métier</h2>
+      <p>Projets personnels construits sur des jeux de données simulés. Les chiffres et graphiques ci-dessous sont recalculés directement à partir des modèles de données de chaque rapport.</p>
+    </div>
+
+    <!-- BatiStock -->
+    <article class="project">
+      <div>
+        <p class="eyebrow">Négoce de matériaux BTP · Direction générale</p>
+        <h3>BatiStock Pro : piloter un réseau de 10 agences</h3>
+        <div class="meta num"><span>11 870 ventes</span><span>1 200 clients</span><span>59 produits</span><span>2024 – 2026</span></div>
+        <p class="question"><b>Question :</b> où se crée la valeur dans un négoce BTP, entre les segments de clients, les familles de produits et les agences urbaines ou rurales ?</p>
+        <dl class="facts">
+          <dt>Modèle</dt><dd>Schéma en étoile : table de faits Ventes, dimensions Clients, Produits, Agences, Calendrier, avec Fournisseurs en flocon sur Produits.</dd>
+          <dt>Pages</dt><dd><div class="pages"><span>Vue d'ensemble COMEX</span><span>Performance agences</span><span>Produits &amp; clients</span></div></dd>
+          <dt>Techniques</dt><dd>Classements RANKX par agence et famille, part de CA par segment, CA YTD et trimestriel, carte régionale, filtres zone/région.</dd>
+        </dl>
+        <ul class="insights">
+          <li><span class="fig num">65 %</span><span>du CA provient des entreprises du BTP, qui ne représentent que 21 % des clients. Leur panier moyen atteint 7 500 €, contre 490 € pour les particuliers.</span></li>
+          <li><span class="fig num">65 %</span><span>du CA annuel se concentre d'avril à septembre : la saisonnalité du chantier pilote les besoins en stock.</span></li>
+          <li><span class="fig num">48,8 %</span><span>de taux de marge sur l'outillage électroportatif, première famille en CA (24 %) et en rentabilité. Le béton et mortier plafonne à 5,3 %.</span></li>
+        </ul>
+      </div>
+      <div class="proof">
+        <figure>
+          <figcaption><b>Qui fait le chiffre d'affaires ?</b><span>part des clients vs part du CA</span></figcaption>
+          <svg viewBox="0 0 520 210" role="img" aria-label="Part des clients et part du chiffre d'affaires par segment"><line x1="118.0" x2="118.0" y1="14" y2="182" class="grid"/><text x="118.0" y="200" text-anchor="middle" class="tick">0 %</text><line x1="309.0" x2="309.0" y1="14" y2="182" class="grid"/><text x="309.0" y="200" text-anchor="middle" class="tick">35 %</text><line x1="500.0" x2="500.0" y1="14" y2="182" class="grid"/><text x="500.0" y="200" text-anchor="middle" class="tick">70 %</text><text x="108" y="42" text-anchor="end" class="lab">Entreprise BTP</text><rect x="118" y="22" width="115.1" height="14" rx="2" class="bar"/><text x="239.1" y="33" class="val">21 %</text><rect x="118" y="40" width="356.4" height="14" rx="2" class="bar-acc"/><text x="480.4" y="51" class="val">65 %</text><text x="108" y="98" text-anchor="end" class="lab">Artisan</text><rect x="118" y="78" width="262.5" height="14" rx="2" class="bar"/><text x="386.5" y="89" class="val">48 %</text><rect x="118" y="96" width="153.9" height="14" rx="2" class="bar-acc"/><text x="277.9" y="107" class="val">28 %</text><text x="108" y="154" text-anchor="end" class="lab">Particulier</text><rect x="118" y="134" width="168.1" height="14" rx="2" class="bar"/><text x="292.1" y="145" class="val">31 %</text><rect x="118" y="152" width="35.5" height="14" rx="2" class="bar-acc"/><text x="159.5" y="163" class="val">6,5 %</text></svg>
+          <div class="legend"><span><i style="background:var(--bar)"></i>Part des clients</span><span><i style="background:var(--accent)"></i>Part du CA</span></div>
+        </figure>
+        <details class="dax">
+          <summary>Mesures DAX · extrait</summary>
+<pre>CA_Total =
+SUMX ( Ventes,
+    Ventes[quantite]
+        * RELATED ( Produits[prix_unitaire] )
+        * ( 1 - Ventes[remise_pct] ) )
+
+CA_Segment_Pct =
+DIVIDE ( [CA_Total],
+    CALCULATE ( [CA_Total], ALL ( Clients ) ) )
+
+Rank_Agence =
+RANKX ( ALL ( Agences ), [CA_Total], , DESC )</pre>
+        </details>
+      </div>
+    </article>
+
+    <!-- Boutique Paris -->
+    <article class="project">
+      <div>
+        <p class="eyebrow">Retail prêt-à-porter · Réseau de 8 magasins</p>
+        <h3>Boutique Paris : ventes, magasins et clientèle</h3>
+        <div class="meta num"><span>14 610 ventes</span><span>800 clients</span><span>92 produits</span><span>2024 – 2025</span></div>
+        <p class="question"><b>Question :</b> quels magasins, produits et canaux d'acquisition portent le chiffre d'affaires, et à quel niveau de marge ?</p>
+        <dl class="facts">
+          <dt>Modèle</dt><dd>Schéma en étoile : Ventes reliée à Produits, Magasins, Clients et une table Calendrier dédiée.</dd>
+          <dt>Pages</dt><dd><div class="pages"><span>Vue d'ensemble</span><span>Analyse magasins</span><span>Produits &amp; clients</span></div></dd>
+          <dt>Techniques</dt><dd>CA net de remises, marge et taux de marque, panier moyen, CA YTD, N-1 et glissant sur 3 mois, classement des magasins, comparaison boutiques et outlets.</dd>
+        </dl>
+        <ul class="insights">
+          <li><span class="fig num">+65 %</span><span>de CA en décembre par rapport à un mois moyen. Juin et juillet forment le second pic de l'année.</span></li>
+          <li><span class="fig num">54 / 48</span><span>taux de marque des boutiques face aux outlets (en %). Les 2 outlets réalisent 22 % du CA avec une marge plus faible.</span></li>
+          <li><span class="fig num">49 %</span><span>du CA vient de nouveaux clients. Les réseaux sociaux sont le premier canal d'acquisition (22 % du CA).</span></li>
+        </ul>
+      </div>
+      <div class="proof">
+        <figure>
+          <figcaption><b>CA mensuel moyen</b><span>k€ · moyenne 2024–2025</span></figcaption>
+          <svg viewBox="0 0 520 230" role="img" aria-label="CA mensuel moyen en milliers d'euros, pics en juin, juillet et décembre"><line x1="44" x2="510" y1="190.0" y2="190.0" class="grid"/><text x="36" y="194.0" text-anchor="end" class="tick">0</text><line x1="44" x2="510" y1="134.0" y2="134.0" class="grid"/><text x="36" y="138.0" text-anchor="end" class="tick">40</text><line x1="44" x2="510" y1="78.0" y2="78.0" class="grid"/><text x="36" y="82.0" text-anchor="end" class="tick">80</text><line x1="44" x2="510" y1="22.0" y2="22.0" class="grid"/><text x="36" y="26.0" text-anchor="end" class="tick">120</text><rect x="51.0" y="105.9" width="24.9" height="84.1" rx="2" class="bar"><title>60.1 k€</title></rect><text x="63.4" y="206" text-anchor="middle" class="tick">J</text><rect x="89.8" y="108.6" width="24.9" height="81.4" rx="2" class="bar"><title>58.2 k€</title></rect><text x="102.2" y="206" text-anchor="middle" class="tick">F</text><rect x="128.7" y="107.6" width="24.9" height="82.4" rx="2" class="bar"><title>58.9 k€</title></rect><text x="141.1" y="206" text-anchor="middle" class="tick">M</text><rect x="167.5" y="109.0" width="24.9" height="81.0" rx="2" class="bar"><title>57.8 k€</title></rect><text x="179.9" y="206" text-anchor="middle" class="tick">A</text><rect x="206.3" y="99.8" width="24.9" height="90.2" rx="2" class="bar"><title>64.4 k€</title></rect><text x="218.8" y="206" text-anchor="middle" class="tick">M</text><rect x="245.2" y="66.3" width="24.9" height="123.7" rx="2" class="bar-hi"><title>88.4 k€</title></rect><text x="257.6" y="206" text-anchor="middle" class="tick">J</text><text x="257.6" y="60.3" text-anchor="middle" class="val">88</text><rect x="284.0" y="71.5" width="24.9" height="118.5" rx="2" class="bar-hi"><title>84.7 k€</title></rect><text x="296.4" y="206" text-anchor="middle" class="tick">J</text><text x="296.4" y="65.5" text-anchor="middle" class="val">85</text><rect x="322.8" y="107.3" width="24.9" height="82.7" rx="2" class="bar"><title>59.0 k€</title></rect><text x="335.3" y="206" text-anchor="middle" class="tick">A</text><rect x="361.7" y="107.1" width="24.9" height="82.9" rx="2" class="bar"><title>59.2 k€</title></rect><text x="374.1" y="206" text-anchor="middle" class="tick">S</text><rect x="400.5" y="106.2" width="24.9" height="83.8" rx="2" class="bar"><title>59.8 k€</title></rect><text x="412.9" y="206" text-anchor="middle" class="tick">O</text><rect x="439.3" y="99.4" width="24.9" height="90.6" rx="2" class="bar"><title>64.7 k€</title></rect><text x="451.8" y="206" text-anchor="middle" class="tick">N</text><rect x="478.2" y="30.3" width="24.9" height="159.7" rx="2" class="bar-hi"><title>114.0 k€</title></rect><text x="490.6" y="206" text-anchor="middle" class="tick">D</text><text x="490.6" y="24.3" text-anchor="middle" class="val">114</text></svg>
+          <div class="legend"><span><i style="background:var(--signal)"></i>Mois de pic (soldes, fêtes)</span></div>
+        </figure>
+        <details class="dax">
+          <summary>Mesures DAX · extrait</summary>
+<pre>CA_N_1 =
+CALCULATE ( [CA_Total],
+    SAMEPERIODLASTYEAR ( Calendrier[date] ) )
+
+Evolution_YoY =
+DIVIDE ( [CA_Total] - [CA_N_1], [CA_N_1], 0 )
+
+CA_3M =
+CALCULATE ( [CA_Total],
+    DATESINPERIOD ( Calendrier[date],
+        MAX ( Calendrier[date] ), -3, MONTH ) )</pre>
+        </details>
+      </div>
+    </article>
+
+    <!-- Performance commerciale -->
+    <article class="project">
+      <div>
+        <p class="eyebrow">Distribution de matériel informatique · B2B, 4 pays</p>
+        <h3>Performance commerciale 2023 – 2025</h3>
+        <div class="meta num"><span>500 commandes</span><span>1 341 lignes</span><span>125 clients</span><span>France, Espagne, Angleterre, Allemagne</span></div>
+        <p class="question"><b>Question :</b> quels pays, produits et clients font la croissance, et lesquels font la marge ?</p>
+        <dl class="facts">
+          <dt>Données</dt><dd>Fichiers de ventes consolidés automatiquement depuis un dossier avec Power Query (Folder.Files et fonction personnalisée).</dd>
+          <dt>Pages</dt><dd><div class="pages"><span>Performance commerciale</span><span>Analyse clients</span><span>Analyse produits</span></div></dd>
+          <dt>Techniques</dt><dd>Évolution N vs N-1 avec indicateur ▲/▼, rang et part de CA par client, CA cumulé pour l'analyse de concentration, nuages de points CA, marge et volume.</dd>
+        </dl>
+        <ul class="insights">
+          <li><span class="fig num">+47 %</span><span>de CA en 2025 après un recul de 22,8 % en 2024 : 4,6 M€ sur la dernière année.</span></li>
+          <li><span class="fig num">50 %</span><span>du CA est réalisé par les 10 premiers clients sur 123 actifs. C'est un risque de concentration à suivre.</span></li>
+          <li><span class="fig num">34 %</span><span>de taux de marge seulement sur l'informatique, qui pèse 55 % du CA. La bureautique et communication atteint 62 %.</span></li>
+        </ul>
+      </div>
+      <div class="proof">
+        <figure>
+          <figcaption><b>Chiffre d'affaires annuel</b><span>M€ · évolution N vs N-1</span></figcaption>
+          <svg viewBox="0 0 520 230" role="img" aria-label="Chiffre d'affaires annuel en millions d'euros"><line x1="44" x2="510" y1="190.0" y2="190.0" class="grid"/><text x="36" y="194.0" text-anchor="end" class="tick">0</text><line x1="44" x2="510" y1="158.0" y2="158.0" class="grid"/><text x="36" y="162.0" text-anchor="end" class="tick">1</text><line x1="44" x2="510" y1="126.0" y2="126.0" class="grid"/><text x="36" y="130.0" text-anchor="end" class="tick">2</text><line x1="44" x2="510" y1="94.0" y2="94.0" class="grid"/><text x="36" y="98.0" text-anchor="end" class="tick">3</text><line x1="44" x2="510" y1="62.0" y2="62.0" class="grid"/><text x="36" y="66.0" text-anchor="end" class="tick">4</text><line x1="44" x2="510" y1="30.0" y2="30.0" class="grid"/><text x="36" y="34.0" text-anchor="end" class="tick">5</text><rect x="87.5" y="60.4" width="68.3" height="129.6" rx="2" class="bar"/><text x="121.7" y="208" text-anchor="middle" class="tick">2023</text><text x="121.7" y="52.4" text-anchor="middle" class="val">4,05 M€</text><rect x="242.8" y="89.8" width="68.3" height="100.2" rx="2" class="bar"/><text x="277.0" y="208" text-anchor="middle" class="tick">2024</text><text x="277.0" y="81.8" text-anchor="middle" class="val">3,13 M€</text><text x="277.0" y="65.8" text-anchor="middle" class="neg">▼ −22,8 %</text><rect x="398.2" y="42.8" width="68.3" height="147.2" rx="2" class="bar-acc"/><text x="432.3" y="208" text-anchor="middle" class="tick">2025</text><text x="432.3" y="34.8" text-anchor="middle" class="val">4,60 M€</text><text x="432.3" y="18.8" text-anchor="middle" class="pos">▲ +47,0 %</text></svg>
+        </figure>
+        <details class="dax">
+          <summary>Mesures DAX · extrait</summary>
+<pre>Rang_Client_CA =
+RANKX ( ALL ( Clients ), [CA_Total], , DESC, Dense )
+
+CA_Cumule_Client =
+VAR RangActuel = [Rang_Client_CA]
+RETURN
+    CALCULATE ( [CA_Total],
+        FILTER ( ALL ( Clients ),
+            [Rang_Client_CA] &lt;= RangActuel ) )
+
+Evolution_Icone =
+VAR Evol = [Evolution_N_vs_N1]
+RETURN IF ( Evol &gt; 0, "▲ " &amp; FORMAT ( Evol, "0.0%" ),
+          "▼ " &amp; FORMAT ( Evol, "0.0%" ) )</pre>
+        </details>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="missions">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Expériences professionnelles</p>
+      <h2>Ce que mes analyses ont changé</h2>
+      <p>Les données de ces missions sont confidentielles. Je présente le problème, la démarche et la décision qu'elle a permis de prendre.</p>
+    </div>
+    <div class="missions">
+      <article class="mission">
+        <p class="when"><b>CAT France</b>Data Analyst<br>05/2024 – 08/2026<br>Transport et logistique automobile</p>
+        <div>
+          <h3>Réduire l'immobilisation des véhicules sur 5 centres</h3>
+          <p>Des véhicules bloqués (avarie, hors centre, en attente de prestation) retardaient leur livraison aux clients finaux sur les sites de Flins, Le Havre, Tours, Wavrin et Ambérieux.</p>
+          <ul>
+            <li>Analyse des blocages à partir du logiciel de gestion de flotte 2020 PF</li>
+            <li>Rapports Power BI quotidiens pour la direction, support d'une vingtaine d'utilisateurs</li>
+            <li>Automatisation des tâches répétitives par macros VBA</li>
+          </ul>
+          <p class="stack">Power BI · Excel · VBA · 2020 PF</p>
+        </div>
+        <div class="res num">
+          <div><strong>+15 %</strong><span>de disponibilité de la flotte</span></div>
+          <div><strong>−30 %</strong><span>de temps de traitement manuel</span></div>
+        </div>
+      </article>
+      <article class="mission">
+        <p class="when"><b>DATA ON</b>Consultante Data<br>12/2022 – 03/2024<br>Conseil en valorisation de la donnée</p>
+        <div>
+          <h3>Structurer le pilotage commercial de plusieurs clients</h3>
+          <p>Des clients sans reporting fiable sur leurs ventes, préparé à la main à partir de sources multiples.</p>
+          <ul>
+            <li>Recueil des besoins, consolidation de données MySQL et Excel</li>
+            <li>Analyse du CA, des meilleurs produits et de la performance des équipes</li>
+            <li>Alertes de contrôle sur le CA et les délais de livraison, formation des clients</li>
+          </ul>
+          <p class="stack">Power BI · MySQL · Azure · Excel</p>
+        </div>
+        <div class="res num">
+          <div><strong>−25 %</strong><span>de temps de préparation des rapports</span></div>
+          <div><strong>~10</strong><span>tableaux de bord interactifs livrés</span></div>
+        </div>
+      </article>
+      <article class="mission">
+        <p class="when"><b>VENOM</b>Data Analyst (stage)<br>02/2022 – 08/2022<br>Énergie · partenaire ENGIE</p>
+        <div>
+          <h3>Comprendre et réduire l'attrition de 200 000 clients</h3>
+          <p>Un taux de churn estimé à 30 % sur le portefeuille clients d'un fournisseur d'énergie.</p>
+          <ul>
+            <li>Analyse descriptive et modèle prédictif de churn sous Python</li>
+            <li>Analyse de sentiments (NLP) par classification des commentaires clients</li>
+            <li>Tableau de bord Power BI de suivi, intégré au ciblage des campagnes de rétention</li>
+          </ul>
+          <p class="stack">Python · Machine Learning · NLP · Power BI</p>
+        </div>
+        <div class="res num">
+          <div><strong>−10 pts</strong><span>de taux d'attrition</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow">Compétences</p>
+      <h2>Outils et preuves</h2>
+    </div>
+    <div class="table-scroll">
+      <table class="skills">
+        <thead><tr><th>Domaine</th><th>Outils</th><th>Mis en œuvre dans</th></tr></thead>
+        <tbody>
+          <tr><td>Business Intelligence</td><td>Power BI (DAX, Power Query, RLS, Power BI Service), Excel avancé (Power Pivot, TCD)</td><td>3 projets Power BI · CAT France · DATA ON · VENOM</td></tr>
+          <tr><td>Modélisation</td><td>Schémas en étoile, tables calendrier, intelligence temporelle (YTD, N-1, glissant)</td><td>BatiStock Pro · Boutique Paris</td></tr>
+          <tr><td>Requêtage</td><td>SQL, MySQL</td><td>DATA ON</td></tr>
+          <tr><td>Data science</td><td>Python (pandas, numpy, matplotlib, seaborn), machine learning, NLP</td><td>VENOM</td></tr>
+          <tr><td>Automatisation</td><td>VBA, Power Query (consolidation de dossiers), alertes Power BI</td><td>CAT France · DATA ON · Performance commerciale</td></tr>
+          <tr><td>Fonctionnel</td><td>Recueil des besoins, définition des KPI, formation et support utilisateurs</td><td>Toutes les missions</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="parcours">
+  <div class="wrap cols">
+    <div>
+      <div class="sec-head"><p class="eyebrow">Parcours</p><h2>Expérience et formation</h2></div>
+      <ul class="timeline">
+        <li><span class="d num">2024 – 2026</span><span><b>Data Analyst</b><small>CAT France</small></span></li>
+        <li><span class="d num">2022 – 2024</span><span><b>Consultante Data</b><small>DATA ON</small></span></li>
+        <li><span class="d num">2022</span><span><b>Data Analyst, stage</b><small>VENOM</small></span></li>
+        <li><span class="d num">2021 – 2022</span><span><b>Mastère spécialisé Expert Big Data Engineer</b><small>Université de technologie de Troyes</small></span></li>
+        <li><span class="d num">2019 – 2020</span><span><b>Master Gestion des risques financiers</b><small>Université Saint-Louis, Bruxelles</small></span></li>
+      </ul>
+    </div>
+    <div class="side">
+      <div><h3 class="sub">Certifications</h3>
+        <ul class="timeline">
+          <li><span class="d">PL-300</span><span><b>Power BI Data Analyst</b><small>Microsoft</small></span></li>
+          <li><span class="d">AZ-900</span><span><b>Azure Fundamentals</b><small>Microsoft</small></span></li>
+        </ul></div>
+      <div><h3 class="sub">Langues</h3>
+        <ul class="timeline">
+          <li><span class="d">Français</span><span>Langue maternelle</span></li>
+          <li><span class="d">Anglais</span><span>Professionnel</span></li>
+        </ul></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <p class="eyebrow" style="color:inherit;opacity:.7">Contact</p>
+    <h2>Un poste de Data Analyst à pourvoir ?</h2>
+    <p>Je suis disponible pour échanger sur vos besoins en reporting, en pilotage de la performance et en analyse de données.</p>
+    <div class="links" id="links"></div>
+    <p class="mail" id="mail" hidden></p>
+  </div>
+</section>
+<footer><div class="wrap">© Judith Kom Meta · Les projets personnels reposent sur des données simulées.</div></footer>
+
+<script>
+// Liens à compléter : un lien vide n'est pas affiché.
+const LIENS = {
+  linkedin: "",
+  github: "",
+  notion: "",
+  cv: "",
+  email: ""
+};
+(function(){
+  const box=document.getElementById('links');
+  const add=(href,label,primary)=>{ if(!href) return; const a=document.createElement('a'); a.href=href; a.textContent=label; a.target='_blank'; a.rel='noopener'; if(primary) a.className='primary'; box.appendChild(a); };
+  add(LIENS.linkedin,'LinkedIn',true); add(LIENS.github,'GitHub'); add(LIENS.notion,'Portfolio Notion'); add(LIENS.cv,'Télécharger mon CV');
+  if(LIENS.email){
+    const m=document.getElementById('mail'); m.textContent=LIENS.email; m.hidden=false;
+    const b=document.createElement('button'); b.type='button'; b.id='copy-mail'; b.textContent='Copier mon e-mail';
+    b.addEventListener('click',()=>{ navigator.clipboard.writeText(LIENS.email).then(()=>{b.textContent='E-mail copié';}).catch(()=>{ const r=document.createRange(); r.selectNodeContents(m); const s=getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent='Sélectionné, copiez-le'; }); });
+    box.appendChild(b);
+  }
+})();
+</script>
+
+</body>
+</html>
