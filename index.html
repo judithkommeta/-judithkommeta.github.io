@@ -60,7 +60,7 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ledger{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
 .ledger div{padding:1rem 1rem 0 0;display:flex;flex-direction:column;gap:.35rem}
 .ledger div + div{padding-left:1rem;border-left:1px solid var(--line)}
-.ledger strong{font:700 clamp(1.9rem,4vw,2.6rem)/1 var(--display);letter-spacing:-.02em}
+.ledger strong{font:700 clamp(1.55rem,4vw,2.6rem)/1 var(--display);letter-spacing:-.02em;white-space:nowrap}
 .ledger span{font-size:.875rem;color:var(--muted);line-height:1.4}
 @media (max-width:760px){.ledger{grid-template-columns:repeat(2,minmax(0,1fr))}.ledger div:nth-child(3){padding-left:0;border-left:0}.ledger div:nth-child(n+3){padding-top:1.25rem}}
 
@@ -191,7 +191,7 @@ footer{padding-block:1.5rem;font-size:.8rem;color:var(--muted)}
     </div>
     <div class="ledger num" aria-label="Résultats obtenus en mission">
       <div><strong>+15 %</strong><span>de disponibilité de la flotte de véhicules · CAT France</span></div>
-      <div><strong>−10 pts</strong><span>de taux d'attrition client · VENOM (énergie)</span></div>
+      <div><strong>30 → 20 %</strong><span>de taux d'attrition client · VENOM (énergie)</span></div>
       <div><strong>−30 %</strong><span>de temps de traitement manuel grâce aux macros VBA</span></div>
       <div><strong>~10</strong><span>tableaux de bord Power BI livrés à des clients · DATA ON</span></div>
     </div>
@@ -378,7 +378,7 @@ RETURN IF ( Evol &gt; 0, "▲ " &amp; FORMAT ( Evol, "0.0%" ),
         </div>
       </article>
       <article class="mission">
-        <p class="when"><b>VENOM</b>Data Analyst (stage)<br>02/2022 – 08/2022<br>Énergie · partenaire ENGIE</p>
+        <p class="when"><b>VENOM</b>Data Analyst<br>02/2022 – 08/2022<br>Énergie · partenaire ENGIE</p>
         <div>
           <h3>Comprendre et réduire l'attrition de 200 000 clients</h3>
           <p>Un taux de churn estimé à 30 % sur le portefeuille clients d'un fournisseur d'énergie.</p>
@@ -390,7 +390,7 @@ RETURN IF ( Evol &gt; 0, "▲ " &amp; FORMAT ( Evol, "0.0%" ),
           <p class="stack">Python · Machine Learning · NLP · Power BI</p>
         </div>
         <div class="res num">
-          <div><strong>−10 pts</strong><span>de taux d'attrition</span></div>
+          <div><strong>30 → 20 %</strong><span>de taux d'attrition</span></div>
         </div>
       </article>
     </div>
@@ -426,7 +426,7 @@ RETURN IF ( Evol &gt; 0, "▲ " &amp; FORMAT ( Evol, "0.0%" ),
       <ul class="timeline">
         <li><span class="d num">2024 – 2026</span><span><b>Data Analyst</b><small>CAT France</small></span></li>
         <li><span class="d num">2022 – 2024</span><span><b>Consultante Data</b><small>DATA ON</small></span></li>
-        <li><span class="d num">2022</span><span><b>Data Analyst, stage</b><small>VENOM</small></span></li>
+        <li><span class="d num">2022</span><span><b>Data Analyst</b><small>VENOM</small></span></li>
         <li><span class="d num">2021 – 2022</span><span><b>Mastère spécialisé Expert Big Data Engineer</b><small>Université de technologie de Troyes</small></span></li>
         <li><span class="d num">2019 – 2020</span><span><b>Master Gestion des risques financiers</b><small>Université Saint-Louis, Bruxelles</small></span></li>
       </ul>
@@ -461,11 +461,11 @@ RETURN IF ( Evol &gt; 0, "▲ " &amp; FORMAT ( Evol, "0.0%" ),
 <script>
 // Liens à compléter : un lien vide n'est pas affiché.
 const LIENS = {
-  linkedin: "",
-  github: "",
+  linkedin: "https://www.linkedin.com/in/judith-kom-meta",
+  github: "https://github.com/judithkommeta",
   notion: "",
   cv: "",
-  email: ""
+  email: "judithkommeta@gmail.com"
 };
 (function(){
   const box=document.getElementById('links');
